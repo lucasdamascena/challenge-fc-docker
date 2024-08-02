@@ -1,0 +1,14 @@
+FROM golang:latest AS builder
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN go mod init main
+RUN go build -o main
+
+FROM scratch
+
+COPY --from=builder /usr/src/app/main /main
+
+CMD ["/main"]
