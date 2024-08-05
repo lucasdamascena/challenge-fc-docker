@@ -1,0 +1,41 @@
+services:
+  db:
+    build: 
+      context: ./mysql
+    container_name: db
+    restart: always
+    tty: true
+    networks:
+      - nodenet
+    volumes:
+      - ./mysql:/var/lib/mysql_shared
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+
+  node:
+    build:
+      context: ./node
+      dockerfile: Dockerfile.prod
+    image: lucasdamascena/node
+    container_name: app
+    tty: true
+    volumes:
+      - ./node:/usr/src/app
+    networks:
+      - nodenet
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: lucasdamascena/nginx
+    container_name: nginx
+    networks:
+      - nodenet
+    ports:
+      - "8080:80"
+
+networks:
+  nodenet:
+    driver: bridge
