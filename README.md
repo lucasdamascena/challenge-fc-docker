@@ -8,6 +8,8 @@ Create a Docker image that, when executed with the command:
 docker run lucasdamascena/fullcycle
 ```
 
+If you want to access the image directly on Docker Hub, here is the link: https://hub.docker.com/r/lucasdamascena/fullcycle
+
 - I make sure the image prints the message: "Full Cycle Rocks!!";
 - I use official Go images from Docker Hub;
 - The final image is less than 2MB.
