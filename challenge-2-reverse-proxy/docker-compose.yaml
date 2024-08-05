@@ -2,6 +2,7 @@ services:
   db:
     build: 
       context: ./mysql
+    image: lucasdamascena/mysql
     container_name: db
     restart: always
     tty: true
@@ -24,6 +25,8 @@ services:
       - ./node:/usr/src/app
     networks:
       - nodenet
+    depends_on:
+      - db
 
   nginx:
     build:
@@ -35,6 +38,8 @@ services:
       - nodenet
     ports:
       - "8080:80"
+    depends_on:
+      - node
 
 networks:
   nodenet:
