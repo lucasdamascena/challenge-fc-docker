@@ -11,7 +11,7 @@ Node.js Application (node):
 - Image: lucasdamascena/node
 - Context: ./node
 - Dockerfile: Dockerfile.prod
-- Volumes: Mounts the ./node directory for the Node.js application.
+- Volumes: The "./node" volume is mounted at "/usr/src/app" inside the container to provide access to the application source code. Additionally, the anonymous volume "/usr/src/app/node_modules" is used to store installed Node.js modules, preventing them from being overwritten when rebuilding the image.
 - Dependency: The application waits for the database to start before starting up, managed by dockerize.
 
 Nginx Server (nginx):
